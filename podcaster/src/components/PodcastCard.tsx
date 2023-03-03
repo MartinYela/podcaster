@@ -1,22 +1,26 @@
 import { Typography, Card, Stack } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { FC } from "react";
 
-const PodcastCard = () => {
+type Props = {
+  title: string;
+  author: string;
+  url: string;
+};
+
+const PodcastCard: FC<Props> = ({ title, author, url }) => {
   return (
-    <Stack height={220}>
-      <Card sx={{ width: 220, position: "relative", overflow: "visible" }}>
-        <Stack alignItems="center" margin="55px 0 5px 0">
+    <Stack height={240}>
+      <Card sx={{ width: 240, position: "relative", overflow: "visible" }}>
+        <Stack alignItems="center" margin="65px 0 5px 0" textAlign="center" gap={1}>
           <Typography variant="body2" component="div" fontWeight="bold">
-            ALL SONGS CONSIDERED
+            {title}
           </Typography>
           <Typography variant="subtitle2" color="text.secondary" gutterBottom>
-            Author: NPR
+            Author: {author}
           </Typography>
         </Stack>
-        <Img
-          src="https://is3-ssl.mzstatic.com/image/thumb/Podcasts113/v4/f2/21/fa/f221fabd-017f-5125-633b-f1fe4f39802a/mza_182995249085044287.jpg/55x55bb.png"
-          alt="Imágen Podcast"
-        />
+        <Img src={url} alt="Imágen Podcast" />
       </Card>
     </Stack>
   );

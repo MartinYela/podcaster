@@ -1,7 +1,12 @@
 import { Stack } from "@mui/material";
 import PodcastCard from "./PodcastCard";
+import { FC } from "react";
 
-const PodcastSection = () => {
+type Props = {
+  podcasts: any;
+};
+
+const PodcastSection: FC<Props> = ({ podcasts }) => {
   return (
     <Stack
       direction="row"
@@ -10,14 +15,16 @@ const PodcastSection = () => {
       gap={6}
       marginTop={10}
     >
-      <PodcastCard />
-      <PodcastCard />
-      <PodcastCard />
-      <PodcastCard />
-      <PodcastCard />
-      <PodcastCard />
-      <PodcastCard />
-      <PodcastCard />
+      {podcasts.map((podcast: any) => {
+        return (
+          <PodcastCard
+            key={podcast["im:name"].label}
+            title={podcast["im:name"].label}
+            author={podcast["im:artist"].label}
+            url={podcast["im:image"][2].label}
+          />
+        );
+      })}
     </Stack>
   );
 };

@@ -1,27 +1,27 @@
-import { Stack, Divider, TextField, Typography, Chip } from "@mui/material";
-import PodcastSection from "../components/PodcastSection";
+import { Stack, CircularProgress, Typography, Divider } from "@mui/material";
+import Error from "../components/Error";
+import { usePodcastOperations } from "../data/podcast/hooks";
+import FilteredPage from "../components/FilteredPage";
 
 const Main = () => {
+  const { podcasts, isLoading, error } = usePodcastOperations();
+
   return (
-    <Stack height="100vh" width="100vw" bgcolor="white">
+    <Stack minHeight="100vh" width="100vw" bgcolor="white">
       <Stack margin="80px">
         <Typography color="primary">Podcaster</Typography>
         <Divider />
-        <Stack
-          alignItems="center"
-          margin="20px 0"
-          direction="row"
-          justifyContent="end"
-          gap="10px"
-        >
-          <Chip label="100" color="primary" size="small" />
-          <TextField
-            variant="outlined"
-            size="small"
-            label="Filter podcast..."
-          />
-        </Stack>
-        <PodcastSection />
+        <>
+          {isLoading ? (
+            <Stack alignItems="center" marginTop={15}>
+              <CircularProgress />
+            </Stack>
+          ) : podcasts && !error ? (
+            <FilteredPage podcasts={podcasts} />
+          ) : (
+            error && <Error error={error as string} />
+          )}
+        </>
       </Stack>
     </Stack>
   );
