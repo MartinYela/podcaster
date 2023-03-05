@@ -15,5 +15,7 @@ docker run build
 docker build -t podcaster .
 docker run -it -p 80:80 --name podcaster podcaster
 ```
+change localhost to server url in the file "default.conf".
 
-Open [http://localhost](http://localhost) with your browser to see the result
+Open [{url}]({url}) with your browser to see the result
+
