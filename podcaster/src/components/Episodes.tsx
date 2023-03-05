@@ -25,6 +25,7 @@ const Episodes: FC<Props> = ({ podcastId }) => {
       <Card
         sx={{
           width: "100%",
+          height: "100%",
           boxShadow:
             "0 0px 1px rgba(0, 0, 0, 0.1), 0 1px 0 1px rgba(0, 0, 0, 0.1)",
           marginTop: "20px",

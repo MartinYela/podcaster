@@ -1,11 +1,14 @@
+import { FC } from "react";
 import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { FC } from "react";
+import { esES } from "@mui/x-data-grid";
+
 import { formatDate, formatTime } from "../helpers/transformData";
 
 const columns: GridColDef[] = [
   {
+    flex: 0.7,
     field: "trackName",
     headerName: "Title",
     renderCell: ({ row }: CellType) => (
@@ -13,12 +16,14 @@ const columns: GridColDef[] = [
     ),
   },
   {
+    flex: 0.15,
     field: "releaseDate",
     headerName: "Date",
     align: "center",
     headerAlign: "center",
   },
   {
+    flex: 0.15,
     field: "trackTimeMillis",
     headerName: "Duration",
     align: "right",
@@ -39,6 +44,7 @@ const EpisodesDataGrid: FC<Props> = ({ episodes }) => {
   return (
     <Box sx={{ width: "100%" }}>
       <DataGrid
+        localeText={esES.components.MuiDataGrid.defaultProps.localeText}
         rows={episodesArray}
         columns={columns}
         disableRowSelectionOnClick
