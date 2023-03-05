@@ -10,7 +10,7 @@ const EpisodeDetailCard: FC<Props> = ({ episodes }) => {
   const episode = filteredResults.filter(
     (episode: any) => episode.trackId == episodeId
   )[0];
-  console.log(episode)
+
   return (
     <Card
       sx={{

@@ -5,7 +5,6 @@ import { usePodcastGetById } from "../data/podcast/hooks";
 
 const Episodes: FC<Props> = ({ podcastId }) => {
   const { episodes, isLoading } = usePodcastGetById(podcastId);
-  console.log(episodes);
 
   return (
     <Stack width="70%" minWidth="600px">
