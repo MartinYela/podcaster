@@ -1,21 +1,13 @@
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "../hooks/useForm";
-import {
-  Stack,
-  Divider,
-  TextField,
-  Typography,
-  Chip,
-  CircularProgress,
-} from "@mui/material";
+import { useQueryClient } from "react-query";
+import { Stack, TextField, Chip } from "@mui/material";
 import PodcastSection from "./PodcastSection";
 
-type Props = {
-  podcasts: any;
-};
-
-const FilteredPage: FC<Props> = ({ podcasts }) => {
-  const [podcastsFiltered, setPodcastsFiltered] = useState(podcasts);
+const PodcastList = () => {
+  const queryClient = useQueryClient();
+  const podcasts: any = queryClient.getQueryData("podcasts");
+  const [podcastsFiltered, setPodcastsFiltered] = useState<any[]>(podcasts);
 
   const [formValues, handleInputChange] = useForm({ filter: "" });
   const { filter } = formValues;
@@ -61,4 +53,4 @@ const FilteredPage: FC<Props> = ({ podcasts }) => {
   );
 };
 
-export default FilteredPage;
+export default PodcastList;

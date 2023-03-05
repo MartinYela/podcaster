@@ -12,7 +12,7 @@ const PodcastSection: FC<Props> = ({ podcasts }) => {
       direction="row"
       flexWrap="wrap"
       justifyContent="space-between"
-      gap={6}
+      gap={2}
       marginTop={10}
     >
       {podcasts.map((podcast: any) => {
@@ -22,6 +22,7 @@ const PodcastSection: FC<Props> = ({ podcasts }) => {
             title={podcast["im:name"].label}
             author={podcast["im:artist"].label}
             url={podcast["im:image"][2].label}
+            id={podcast.id.attributes["im:id"]}
           />
         );
       })}
