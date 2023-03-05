@@ -1,8 +1,7 @@
 import { FC } from "react";
-import { Typography } from "@mui/material";
-import Box from "@mui/material/Box";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { esES } from "@mui/x-data-grid";
+import { Typography, Box } from "@mui/material";
+import { DataGrid, GridColDef, esES } from "@mui/x-data-grid";
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { formatDate, formatTime } from "../helpers/transformData";
 
@@ -33,13 +32,19 @@ const columns: GridColDef[] = [
 ];
 
 const EpisodesDataGrid: FC<Props> = ({ episodes }) => {
+  const navigate = useNavigate();
+  const { podcastId } = useParams();
   const filteredResults = episodes.results.filter((_: any, i: number) => i > 0);
   const episodesArray = filteredResults.map((episode: any) => ({
-    id: episode.trackName,
+    id: episode.trackId,
     trackName: episode.trackName,
     releaseDate: formatDate(episode.releaseDate),
     trackTimeMillis: formatTime(episode.trackTimeMillis),
   }));
+
+  const handleClick = (row: CellType) => {
+    navigate(`/podcast/${podcastId}/episode/${row.row.id}`);
+  }
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -47,6 +52,7 @@ const EpisodesDataGrid: FC<Props> = ({ episodes }) => {
         localeText={esES.components.MuiDataGrid.defaultProps.localeText}
         rows={episodesArray}
         columns={columns}
+        onRowClick={(row) => handleClick(row)}
         disableRowSelectionOnClick
         autoHeight
         initialState={{
@@ -81,6 +87,7 @@ type PermissionRowType = {
   trackName: string;
   releaseDate: string;
   trackTimeMillis: string;
+  id?: number;
 };
 
 type Props = {

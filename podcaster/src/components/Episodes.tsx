@@ -2,10 +2,10 @@ import { Stack, Card, Typography, CircularProgress } from "@mui/material";
 import { FC } from "react";
 import EpisodesDataGrid from "./EpisodesDataGrid";
 import { usePodcastGetById } from "../data/podcast/hooks";
-import Loading from "../pages/Loading";
 
 const Episodes: FC<Props> = ({ podcastId }) => {
   const { episodes, isLoading } = usePodcastGetById(podcastId);
+  console.log(episodes);
 
   return (
     <Stack width="70%" minWidth="600px">
@@ -19,7 +19,7 @@ const Episodes: FC<Props> = ({ podcastId }) => {
         }}
       >
         <Typography variant="h6" component="div" fontWeight="bold">
-          Episodes
+          Episodes {episodes ? episodes?.resultCount - 1 : ""}
         </Typography>
       </Card>
       <Card
@@ -30,10 +30,14 @@ const Episodes: FC<Props> = ({ podcastId }) => {
             "0 0px 1px rgba(0, 0, 0, 0.1), 0 1px 0 1px rgba(0, 0, 0, 0.1)",
           marginTop: "20px",
           padding: "10px",
-          textAlign: "center"
+          textAlign: "center",
         }}
       >
-        {episodes ? <EpisodesDataGrid episodes={episodes} /> : <CircularProgress />}
+        {episodes ? (
+          <EpisodesDataGrid episodes={episodes} />
+        ) : (
+          <CircularProgress />
+        )}
       </Card>
     </Stack>
   );

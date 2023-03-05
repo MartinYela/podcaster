@@ -5,6 +5,7 @@ import Main from "../pages/Main";
 import PodcastDetail from "../pages/PodcastDetail";
 import Error from "../components/Error";
 import Loading from "../pages/Loading";
+import EpisodeDetail from "../pages/EpisodeDetail";
 
 const AppRouter = () => {
   const { isLoading, error } = usePodcastGet100();
@@ -20,6 +21,7 @@ const AppRouter = () => {
           ) : (
             <>
               <Route path="/podcast/:podcastId" element={<PodcastDetail />} />
+              <Route path="/podcast/:podcastId/episode/:episodeId" element={<EpisodeDetail />} />
               <Route path="/*" element={<Main />} />
             </>
           )}
